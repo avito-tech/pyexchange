@@ -252,9 +252,15 @@ def new_folder(folder):
   return root
 
 
-def find_folder(parent_id, format=u"Default"):
+def find_folder(parent_id, delegate_for=None, format=u"Default"):
 
-  id = T.DistinguishedFolderId(Id=parent_id) if parent_id in DISTINGUISHED_IDS else T.FolderId(Id=parent_id)
+  if delegate_for != None:
+    id = T.DistinguishedFolderId(
+          {'Id': parent_id},
+          T.Mailbox(T.EmailAddress(delegate_for))
+        )
+  else:
+    id = T.DistinguishedFolderId(Id=parent_id) if parent_id in DISTINGUISHED_IDS else T.FolderId(Id=parent_id)
 
   root = M.FindFolder(
     {u'Traversal': u'Shallow'},
