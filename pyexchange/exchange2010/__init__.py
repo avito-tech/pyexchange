@@ -572,6 +572,14 @@ class Exchange2010CalendarEvent(BaseExchangeCalendarEvent):
       {
         u'xpath': u'//m:Items/t:CalendarItem/t:Recurrence/t:WeeklyRecurrence/t:DaysOfWeek',
       },
+      u'display_to':
+      {
+        u'xpath': u'//m:Items/t:CalendarItem/t:DisplayTo',
+      },
+      u'display_cc':
+      {
+        u'xpath': u'//m:Items/t:CalendarItem/t:DisplayCc',
+      }
     }
 
     result = self.service._xpath_to_dict(element=response, property_map=property_map, namespace_map=soap_request.NAMESPACES)
