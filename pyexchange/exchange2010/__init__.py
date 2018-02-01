@@ -758,7 +758,7 @@ class Exchange2010FolderService(BaseExchangeFolderService):
 
     return Exchange2010Folder(service=self.service, **properties)
 
-  def find_folder(self, parent_id):
+  def find_folder(self, parent_id, delegate_for=None):
     """
       find_folder(parent_id)
       :param str parent_id:  The parent folder to list.
@@ -778,7 +778,7 @@ class Exchange2010FolderService(BaseExchangeFolderService):
           folder.delete()
     """
 
-    body = soap_request.find_folder(parent_id=parent_id, format=u'AllProperties')
+    body = soap_request.find_folder(parent_id=parent_id, delegate_for=delegate_for, format=u'AllProperties')
     response_xml = self.service.send(body)
     return self._parse_response_for_find_folder(response_xml)
 
